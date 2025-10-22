@@ -120,8 +120,6 @@ cargo tarpaulin --out Html --output-dir coverage
 xdg-open coverage/tarpaulin-report.html
 ```
 
-Current test coverage: **33.57%** (480/1430 lines covered)
-
 See [COVERAGE.md](COVERAGE.md) for detailed coverage analysis.
 
 ## Quick Start
