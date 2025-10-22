@@ -1,16 +1,16 @@
 # TAMC - Quick Start Guide
 
-## ✅ Installation Complete!
+## Installation Complete
 
 Your TAMC library is now built and ready to use.
 
-## 📁 Project Structure
+## Project Structure
 
 - **Binary executable**: `./target/release/tamc`
 - **Library crates**: `tamc` and `tamc-core`
 - **Example files**: Created for testing
 
-## 🚀 Usage
+## Usage
 
 ### Basic Command
 
@@ -47,7 +47,7 @@ Your TAMC library is now built and ready to use.
 - Acceptance rates
 - Ground state configurations
 
-## 🔧 Additional Options
+## Additional Options
 
 ### Sample Output
 ```bash
@@ -66,7 +66,7 @@ Your TAMC library is now built and ready to use.
 ./target/release/tamc --suscepts coeffs1.txt coeffs2.txt method.yaml instance.txt output.yaml
 ```
 
-## 📚 Using as a Library
+## Using as a Library
 
 Add to your Rust project's `Cargo.toml`:
 
@@ -83,7 +83,7 @@ use tamc::ising::BqmIsingInstance;
 use tamc_core::traits::*;
 ```
 
-## 🔨 Rebuilding
+## Rebuilding
 
 After making changes:
 
@@ -95,7 +95,7 @@ cargo build
 cargo build --release
 ```
 
-## 🧪 Testing
+## Testing
 
 Run the test suite:
 
@@ -103,7 +103,7 @@ Run the test suite:
 cargo test
 ```
 
-## 📖 Additional Binaries
+## Additional Binaries
 
 The project includes additional utilities:
 
@@ -117,19 +117,17 @@ The project includes additional utilities:
    ./target/release/tamc-pt-opt
    ```
 
-## 🎯 Next Steps
+## Next Steps
 
-1. ✅ Library built successfully
-2. ✅ Example files created
-3. ✅ Test run completed
+1. Library built successfully
+2. Example files created
+3. Test run completed
 4. Create your own Ising problem instances
 5. Adjust method parameters for your specific problem
 6. Explore thermal sampling and susceptibility measurements
 
-## 📝 Notes
+## Notes
 
 - The ground state energy from the example: **-1.9000013**
 - Build completed with 117 warnings (mostly unused imports - safe to ignore)
 - For large problems, use `--release` builds for better performance
-
-Happy Monte Carlo sampling! 🎲

@@ -9,6 +9,12 @@ test_output.yaml
 *.bin
 *.pkl
 
+# Coverage reports
+coverage/
+tarpaulin-report.html
+cobertura.xml
+lcov.info
+
 # IDE files
 .vscode/
 .idea/
