@@ -119,8 +119,6 @@ cargo tarpaulin --out Html --output-dir coverage
 xdg-open coverage/tarpaulin-report.html
 ```
 
-See [COVERAGE.md](COVERAGE.md) for detailed coverage analysis.
-
 ## Quick Start
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed setup and usage instructions.
