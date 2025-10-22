@@ -1,4 +1,8 @@
-TAMC: "Tempering and Annealing" Monte Carlo
+# TAMC: "Tempering and Annealing" Monte Carlo
+
+[![Rust CI](https://github.com/SECQUOIA/tamc/actions/workflows/rust.yml/badge.svg)](https://github.com/SECQUOIA/tamc/actions/workflows/rust.yml)
+[![Coverage](https://github.com/SECQUOIA/tamc/actions/workflows/coverage.yml/badge.svg)](https://github.com/SECQUOIA/tamc/actions/workflows/coverage.yml)
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
 This library provides utilites for specifying and running 
 Monte Carlo sampling algorithms. It is primarily aimed for sampling 
@@ -84,3 +88,46 @@ pub struct PtIcmThermalSamples{
     pub suscept: Vec<Vec<Vec<f32>>>
 }
 ```
+
+## Building and Testing
+
+### Build the Project
+
+```bash
+# Debug build
+cargo build
+
+# Release build (optimized)
+cargo build --release
+```
+
+### Run Tests
+
+```bash
+cargo test
+```
+
+### Generate Coverage Report
+
+```bash
+# Install cargo-tarpaulin
+cargo install cargo-tarpaulin
+
+# Generate HTML report
+cargo tarpaulin --out Html --output-dir coverage
+
+# View report
+xdg-open coverage/tarpaulin-report.html
+```
+
+Current test coverage: **33.57%** (480/1430 lines covered)
+
+See [COVERAGE.md](COVERAGE.md) for detailed coverage analysis.
+
+## Quick Start
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed setup and usage instructions.
+
+## License
+
+This project is available under MIT or Apache-2.0 license.
