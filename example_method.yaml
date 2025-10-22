@@ -1,0 +1,16 @@
+---
+PT:
+  num_sweeps: 2000
+  warmup_fraction: 0.5
+  beta:
+    Geometric:
+      beta_min: 0.2
+      beta_max: 5.0
+      num_beta: 32
+  lo_beta: 1.0
+  icm: true
+  num_replica_chains: 2
+  threads: 1
+  sample: 32
+  sample_states: 32
+  sample_limiting: 2
