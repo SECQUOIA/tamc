@@ -2,7 +2,6 @@
 
 [![Rust CI](https://github.com/SECQUOIA/tamc/actions/workflows/rust.yml/badge.svg)](https://github.com/SECQUOIA/tamc/actions/workflows/rust.yml)
 [![Coverage](https://github.com/SECQUOIA/tamc/actions/workflows/coverage.yml/badge.svg)](https://github.com/SECQUOIA/tamc/actions/workflows/coverage.yml)
-[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
 This library provides utilites for specifying and running 
 Monte Carlo sampling algorithms. It is primarily aimed for sampling 
@@ -125,7 +124,3 @@ See [COVERAGE.md](COVERAGE.md) for detailed coverage analysis.
 ## Quick Start
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed setup and usage instructions.
-
-## License
-
-This project is available under MIT or Apache-2.0 license.
