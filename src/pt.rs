@@ -698,6 +698,7 @@ mod tests {
         let mut pt_icm_params = PtIcmParams::default();
         pt_icm_params.num_sweeps = num_sweeps;
         pt_icm_params.beta = BetaOptions::new_geometric(0.1, 10.0, num_betas as u32);
+        pt_icm_params.lo_beta = Some(1.0);  // Set lo_beta for ICM
         let opts_str = serde_yaml::to_string(&pt_icm_params).unwrap();
         println!("{}", opts_str);
         let beta_arr = pt_icm_params.beta.get_beta_arr();

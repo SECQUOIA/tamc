@@ -523,8 +523,8 @@ pub(crate) mod tests {
         let l = 8;
         let n: u32 = l*l;
         let ensemble_size= 16;
-        let beta0 :f64 = 0.02;
-        let betaf :f64 = 2.0;
+        let beta0 :f32 = 0.02;
+        let betaf :f32 = 2.0;
         let num_sweeps = 200;
 
         let mut rng = Xoshiro256PlusPlus::seed_from_u64(1234);
@@ -535,11 +535,17 @@ pub(crate) mod tests {
             init_states.push(rand_ising_state(n, &instance, &mut rng));
         }
 
-        let beta_schedule = geometric_beta_schedule(beta0, betaf, num_sweeps);
+        let beta_schedule: Vec<f32> = geometric_beta_schedule(beta0 as f64, betaf as f64, num_sweeps)
+            .iter().map(|&x| x as f32).collect();
 
-        //sampler.advance();
-        let mut states = simulated_annealing(&instance, init_states, &beta_schedule, &mut rng, |_i, _|{} );
-        for st in states.iter_mut(){
+        // Create a MetropolisSampler with initial beta and uniform distribution
+        let sampler = MetropolisSampler::new_uniform(&instance, beta0, n);
+        
+        // Run simulated annealing with the sampler
+        simulated_annealing(sampler, &mut init_states, &beta_schedule, &mut rng, |_i, _|{} );
+        
+        // Check final states
+        for st in init_states.iter_mut(){
             let mz = st.mag();
             let e = instance.energy(st);
             println!("mz = {}", mz);
