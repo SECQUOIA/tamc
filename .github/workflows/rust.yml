@@ -1,0 +1,117 @@
+name: Rust CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        components: rustfmt, clippy
+        
+    - name: Cache cargo registry
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/registry
+        key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+        
+    - name: Cache cargo index
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/git
+        key: ${{ runner.os }}-cargo-git-${{ hashFiles('**/Cargo.lock') }}
+        
+    - name: Cache cargo build
+      uses: actions/cache@v4
+      with:
+        path: target
+        key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+    
+    - name: Check formatting
+      run: cargo fmt --all -- --check
+      continue-on-error: true
+      
+    - name: Run clippy
+      run: cargo clippy --all-targets --all-features -- -D warnings
+      continue-on-error: true
+      
+    - name: Build (debug)
+      run: cargo build --verbose
+      
+    - name: Build (release)
+      run: cargo build --release --verbose
+      
+    - name: Run tests
+      run: cargo test --verbose
+      
+    - name: Build documentation
+      run: cargo doc --no-deps --verbose
+      
+    - name: Test example run
+      run: |
+        # Create example files if they exist, otherwise skip
+        if [ -f example_method.yaml ] && [ -f example_instance.txt ]; then
+          ./target/release/tamc example_method.yaml example_instance.txt ci_test_output.yaml
+          echo "Example run completed successfully"
+        else
+          echo "Example files not found, skipping example run"
+        fi
+
+  check-examples:
+    name: Verify Examples
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@stable
+      
+    - name: Build release binary
+      run: cargo build --release --verbose
+      
+    - name: Run with example files
+      run: |
+        if [ -f example_method.yaml ] && [ -f example_instance.txt ]; then
+          ./target/release/tamc example_method.yaml example_instance.txt test_output.yaml
+          cat test_output.yaml
+        fi
+
+  build-matrix:
+    name: Build on Multiple Platforms
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        rust: [stable, nightly]
+        
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: ${{ matrix.rust }}
+        
+    - name: Build
+      run: cargo build --verbose
+      
+    - name: Test
+      run: cargo test --verbose

@@ -1,0 +1,25 @@
+# Rust build artifacts
+/target/
+Cargo.lock
+
+# Generated test outputs
+output_results.yaml
+ci_test_output.yaml
+test_output.yaml
+*.bin
+*.pkl
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
